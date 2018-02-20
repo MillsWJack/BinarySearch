@@ -18,18 +18,22 @@
 
 #include <iostream>
 #include <vector>
+#include <numeric>
 
 using namespace std;
 
 int doSearch(vector<int> array, int target);
 
+int guessNum = 0;
+
 int main()
 {
-	vector<int> primes = { 2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37,
-		41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97 };
+	vector<int> values(2097152);
+	iota(begin(values), end(values), 0);
 
-	int result = doSearch(primes, 73);
-	cout << "Found prime at index " << result << endl;
+	int result = doSearch(values, 15938);
+	cout << "Found number at index " << result << endl
+		<< "It took " << guessNum << " guesses\n";
 	return 0;
 }
 
@@ -41,6 +45,7 @@ int doSearch(vector<int> array, int target)
 
 	while (array[guess] != target)
 	{
+		guessNum++;
 		guess = floor((min + max) / 2);
 		if (max < min)
 		{
