@@ -14,6 +14,7 @@
 	6. Otherwise, the guess was too high. 
 		1. Max = guess - 1.
 	7. Go back to step 2.
+
 */
 
 #include <iostream>
@@ -22,22 +23,23 @@
 
 using namespace std;
 
-int doSearch(vector<int> array, int target);
-
-int guessNum = 0;
+int doSearch(vector<int> array, int target, int& guessNum);
 
 int main()
 {
+	int guessNum = 0;
+	int& refGuessNum = guessNum;
+
 	vector<int> values(2097152);
 	iota(begin(values), end(values), 0);
 
-	int result = doSearch(values, 15938);
+	int result = doSearch(values, 102301, refGuessNum);
 	cout << "Found number at index " << result << endl
 		<< "It took " << guessNum << " guesses\n";
 	return 0;
 }
 
-int doSearch(vector<int> array, int target)
+int doSearch(vector<int> array, int target, int& guessNum)
 {
 	int min = 0;
 	int max = array.size() - 1;
